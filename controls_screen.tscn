@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://kd3ptjwvch2s"]
+
+[ext_resource type="Script" path="res://controls_screen.gd" id="1_atfaw"]
+[ext_resource type="Texture2D" uid="uid://dtuhsiefo5gae" path="res://visual-assets/start-screen/controls_with_fight.png" id="2_wfl3q"]
+[ext_resource type="Texture2D" uid="uid://bu6gjln183vmf" path="res://visual-assets/start-screen/controls_with_no_fight.png" id="3_um6gk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gcenb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wfl3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_um6gk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="controls_screen" type="Node2D"]
+script = ExtResource("1_atfaw")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 360)
+sprite_frames = SubResource("SpriteFrames_gcenb")

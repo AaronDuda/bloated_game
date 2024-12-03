@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://cj73fsjrhq0im"]
+
+[ext_resource type="Texture2D" uid="uid://dfydjsr1ywpx4" path="res://visual-assets/backgrounds/dev_background.png" id="1_ifl5o"]
+[ext_resource type="PackedScene" uid="uid://ddgq1pho53yg3" path="res://player.tscn" id="2_5n5jr"]
+[ext_resource type="PackedScene" uid="uid://bpsrn4wc8548e" path="res://addons/health_bar_2d/health_bar_2d.tscn" id="3_fc0i3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_icevx"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yprsd"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_scn3t"]
+
+[node name="FightingMatch" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(654.875, 362.625)
+scale = Vector2(1.35425, 0.944062)
+texture = ExtResource("1_ifl5o")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(566, 597)
+shape = SubResource("WorldBoundaryShape2D_icevx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 200)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_yprsd")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1280, 200)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_scn3t")
+
+[node name="Player" parent="." instance=ExtResource("2_5n5jr")]
+position = Vector2(200, 545)
+
+[node name="Player2" parent="." instance=ExtResource("2_5n5jr")]
+position = Vector2(1080, 545)
+IS_PLAYER_1 = false
+START_RIGHT_FACING = false
+SHIELD = "P2_SHIELD"
+NORMAL_ATTACK = "P2_NORMAL_ATTACK"
+DOWN = "P2_DOWN"
+JUMP = "P2_JUMP"
+LEFT = "P2_LEFT"
+RIGHT = "P2_RIGHT"
+
+[node name="HealthBar2D" parent="." instance=ExtResource("3_fc0i3")]
+offset_left = 45.0
+offset_top = 24.0
+offset_right = 57.0
+offset_bottom = 25.0
+scale = Vector2(32.4382, 51.0714)
+_gradient = true
+
+[node name="HealthBar2D2" parent="." instance=ExtResource("3_fc0i3")]
+offset_left = 800.0
+offset_top = 24.0
+offset_right = 812.0
+offset_bottom = 25.0
+scale = Vector2(32.4382, 51.0714)
+_gradient = true

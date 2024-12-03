@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciqn1aj0kah55"]
+
+[ext_resource type="PackedScene" uid="uid://bpsrn4wc8548e" path="res://addons/health_bar_2d/health_bar_2d.tscn" id="1_lu027"]
+
+[node name="healthbar" type="Node2D"]
+
+[node name="HealthBar2D" parent="." instance=ExtResource("1_lu027")]
+scale = Vector2(2.13519, 4.09441)

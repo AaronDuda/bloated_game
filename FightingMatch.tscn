@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjuv743fjbr5a"]
+
+[ext_resource type="Script" path="res://FightingMatch.gd" id="1_7liv6"]
+[ext_resource type="Texture2D" uid="uid://dfydjsr1ywpx4" path="res://visual-assets/backgrounds/dev_background.png" id="2_m5fqj"]
+[ext_resource type="PackedScene" uid="uid://ddgq1pho53yg3" path="res://player.tscn" id="3_5q2cd"]
+[ext_resource type="PackedScene" uid="uid://bpsrn4wc8548e" path="res://addons/health_bar_2d/health_bar_2d.tscn" id="4_we3vw"]
+[ext_resource type="Texture2D" uid="uid://be2x0moxsrcgu" path="res://visual-assets/start-screen/p1_win.png" id="5_r68g5"]
+[ext_resource type="Texture2D" uid="uid://com58bh6bta3q" path="res://visual-assets/start-screen/p2_win.png" id="6_dj4c0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_icevx"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yprsd"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_scn3t"]
+
+[node name="FightingMatch" type="Node2D"]
+script = ExtResource("1_7liv6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(654.875, 362.625)
+scale = Vector2(1.35425, 0.944062)
+texture = ExtResource("2_m5fqj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(566, 597)
+shape = SubResource("WorldBoundaryShape2D_icevx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 200)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_yprsd")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1280, 200)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_scn3t")
+
+[node name="Player" parent="." instance=ExtResource("3_5q2cd")]
+position = Vector2(200, 545)
+platform_on_leave = 2
+
+[node name="Player2" parent="." instance=ExtResource("3_5q2cd")]
+position = Vector2(1080, 545)
+platform_on_leave = 2
+IS_PLAYER_1 = false
+SHIELD = "P2_SHIELD"
+NORMAL_ATTACK = "P2_NORMAL_ATTACK"
+DOWN = "P2_DOWN"
+JUMP = "P2_JUMP"
+LEFT = "P2_LEFT"
+RIGHT = "P2_RIGHT"
+
+[node name="healthbar" type="Node2D" parent="."]
+position = Vector2(80, 60)
+
+[node name="HealthBar2D" parent="healthbar" instance=ExtResource("4_we3vw")]
+offset_right = 12.0
+offset_bottom = 1.0
+scale = Vector2(32.4382, 51.0714)
+_static = true
+_gradient = true
+
+[node name="healthbar2" type="Node2D" parent="."]
+position = Vector2(800, 60)
+
+[node name="HealthBar2D2" parent="healthbar2" instance=ExtResource("4_we3vw")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 12.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(32.4382, 51.0714)
+_static = true
+_gradient = true
+
+[node name="p1win" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_r68g5")
+
+[node name="p2win" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_dj4c0")
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="health_changed" from="Player" to="." method="_on_player1_health_changed"]
+[connection signal="died" from="Player2" to="." method="_on_player_died"]
+[connection signal="health_changed" from="Player2" to="." method="_on_player2_health_changed"]
